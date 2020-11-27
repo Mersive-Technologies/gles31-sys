@@ -8,7 +8,7 @@ description = "Rust bindings for OpenGL ES 3.1"
 homepage = "https://github.com/Mersive-Technologies/gles31-sys"
 repository = "https://github.com/Mersive-Technologies/gles31-sys"
 readme = "readme.md"
-keywords = ["OpenGL", "ES", "gles", "3d", "graphics", "mobile", "Android"]
+keywords = ["OpenGL", "ES", "gles", "3d", "Android"]
 
 [dependencies]
 

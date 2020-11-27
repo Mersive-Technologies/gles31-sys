@@ -3,6 +3,12 @@ name = "gles31-sys"
 version = "0.1.0"
 authors = ["Brent Gardner <bgardner@squarelabs.net>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "Rust bindings for OpenGL ES 3.1"
+homepage = "https://github.com/Mersive-Technologies/gles31-sys"
+repository = "https://github.com/Mersive-Technologies/gles31-sys"
+readme = "readme.md"
+keywords = ["OpenGL", "ES", "gles", "3d", "graphics", "mobile", "Android"]
 
 [dependencies]
 

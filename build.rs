@@ -1,9 +1,12 @@
+#[cfg(target_os="android")]
 extern crate bindgen;
-
+#[cfg(target_os="android")]
 use std::env;
+#[cfg(target_os="android")]
 use std::path::{PathBuf, Path};
 
-fn main() {
+#[cfg(target_os="android")]
+fn android_build() {
     let android_home = env::var("ANDROID_HOME").expect("ANDROID_HOME not set!");
     let ndk_include_dir = Path::new(android_home.as_str()).join("ndk/21.3.6528147/sysroot/usr/include/");
     let gl31h = ndk_include_dir.join("GLES3/gl31.h");
@@ -24,4 +27,16 @@ fn main() {
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
+}
+
+#[cfg(target_os="ios")]
+fn ios_build() {
+    println!("cargo:rustc-link-lib=framework=OpenGLES");
+}
+
+fn main() {
+    #[cfg(target_os="android")]
+    android_build();
+    #[cfg(target_os="ios")]
+    ios_build();
 }

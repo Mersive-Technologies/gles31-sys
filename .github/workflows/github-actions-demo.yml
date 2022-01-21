@@ -1,0 +1,52 @@
+name: Test-Build
+on: [push]
+jobs:
+  Build-Andrid:
+    runs-on: ubuntu-latest
+    env:
+      NDK_VER: 22.0.7026061
+      ANDROID_SDK_ROOT: /home/runner/.android/sdk
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          pwd # /home/runner/work/gles31-sys/gles31-sys
+          whoami # runner
+          sudo apt-get update > /dev/null
+          sudo apt-get install -y curl build-essential clang-9
+      - name: InstallAndroidTools
+        run: |
+          export ANDROID_HOME="${ANDROID_SDK_ROOT}"
+          export PATH="${ANDROID_SDK_ROOT}/emulator:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin:${PATH}"
+          mkdir -p ${ANDROID_SDK_ROOT}
+          export CLI_TOOLS="https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip"
+          cd ${ANDROID_SDK_ROOT}
+          pwd
+          curl --silent ${CLI_TOOLS} -o cmdline-tools.zip
+          ls -lha
+          unzip cmdline-tools.zip
+          mv cmdline-tools tools
+          mkdir -p cmdline-tools
+          mv tools cmdline-tools
+          cd -
+          yes | sdkmanager --licenses > /dev/null
+          sdkmanager emulator platform-tools > /dev/null
+          sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25" > /dev/null
+          echo "Installing NDK $NDK_VER..."
+          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;$NDK_VER" > /dev/null
+      - name: InstallRust
+        run: |
+          curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --no-modify-path
+          export PATH=$HOME/.cargo/bin:$PATH
+          rustup install 1.57.0
+          rustup target add aarch64-linux-android
+          which cargo
+          cargo --version
+      - name: Build
+        run: |
+          export ANDROID_HOME="${ANDROID_SDK_ROOT}"
+          cargo build --release --target=aarch64-linux-android

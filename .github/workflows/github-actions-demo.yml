@@ -1,15 +1,22 @@
 name: Test-Build
 on: [push]
 jobs:
+  Build-Ios:
+    runs-on: macos-11
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          pwd
+          whoami
+          echo "Hello, MacOS!"
   Build-Andrid:
     runs-on: ubuntu-latest
     env:
       NDK_VER: 22.0.7026061
       ANDROID_SDK_ROOT: /home/runner/.android/sdk
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Setup

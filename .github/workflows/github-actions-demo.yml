@@ -48,4 +48,4 @@ jobs:
       - name: Build
         run: |
           export ANDROID_HOME="${ANDROID_SDK_ROOT}"
-          cargo build --release --target=aarch64-linux-android --toolchain 1.58.1
+          cargo build --release --target=aarch64-linux-android

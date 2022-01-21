@@ -47,7 +47,7 @@ jobs:
           yes | sdkmanager --licenses
           sdkmanager emulator platform-tools
           sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25" > /dev/null
-          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;22.0.7026061" > /dev/null
+          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;21.3.6528147" > /dev/null
       - name: Build
         run: |
           export ANDROID_SDK_ROOT=/home/runner/.android/sdk

@@ -37,7 +37,7 @@ jobs:
           export CLI_TOOLS="https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip"
           cd ${ANDROID_SDK_ROOT}
           pwd
-          curl --silent --output /dev/null ${CLI_TOOLS} -o cmdline-tools.zip
+          curl --silent ${CLI_TOOLS} -o cmdline-tools.zip
           ls -lha
           unzip cmdline-tools.zip
           mv cmdline-tools tools

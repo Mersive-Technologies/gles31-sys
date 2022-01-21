@@ -55,4 +55,6 @@ jobs:
           export PATH="${ANDROID_SDK_ROOT}/emulator:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin:${PATH}"
           echo $ANDROID_HOME
           ls -l $ANDROID_HOME
+          ls -l /home/runner/.android/sdk/ndk
+          find . -name gl31.h
           cargo build --release --target=aarch64-linux-android

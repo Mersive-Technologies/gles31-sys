@@ -16,10 +16,10 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: |
-          pwd
-          whoami
-          apt update
-          apt install -y curl
+          pwd # /home/runner/work/gles31-sys/gles31-sys
+          whoami # runner
+          sudo apt update
+          sudo apt install -y curl
           curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --no-modify-path
           export PATH=$PATH:$HOME/.cargo/bin
           rustup install 1.58.1

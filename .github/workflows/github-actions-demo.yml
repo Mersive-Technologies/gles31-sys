@@ -46,5 +46,8 @@ jobs:
           cd -
           yes | sdkmanager --licenses
           sdkmanager emulator platform-tools
-          sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25"
-          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;22.0.7026061"
+          sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25" | grep -v = || true
+          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;22.0.7026061" | grep -v = || true
+      - name: Build
+        run: |
+          cargo build --release --target=aarch64-linux-android

@@ -21,14 +21,14 @@ jobs:
           whoami # runner
           sudo apt update
           sudo apt install -y curl
-      - name: Install Rust
+      - name: InstallRust
       - run: |
           curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --no-modify-path
           export PATH=$PATH:$HOME/.cargo/bin
           rustup install 1.58.1
           rustup target add --toolchain 1.58.1 aarch64-linux-android
           cargo --version
-      - name: Install Android Tools
+      - name: InstallAndroidTools
       - run: |
           export ANDROID_SDK_ROOT=/home/runner/.android/sdk
           export ANDROID_HOME="${ANDROID_SDK_ROOT}"

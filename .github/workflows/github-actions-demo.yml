@@ -46,8 +46,13 @@ jobs:
           cd -
           yes | sdkmanager --licenses
           sdkmanager emulator platform-tools
-          sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25" | grep -v = || true
-          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;22.0.7026061" | grep -v = || true
+          sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25" > /dev/null
+          sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;22.0.7026061" > /dev/null
       - name: Build
         run: |
+          export ANDROID_SDK_ROOT=/home/runner/.android/sdk
+          export ANDROID_HOME="${ANDROID_SDK_ROOT}"
+          export PATH="${ANDROID_SDK_ROOT}/emulator:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin:${PATH}"
+          echo $ANDROID_HOME
+          ls -l $ANDROID_HOME
           cargo build --release --target=aarch64-linux-android

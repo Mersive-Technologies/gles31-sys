@@ -43,7 +43,7 @@ jobs:
           curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --no-modify-path
           export PATH=$HOME/.cargo/bin:$PATH
           rustup install 1.57.0
-          rustup target add --toolchain 1.57.0 aarch64-linux-android
+          rustup target add aarch64-linux-android
           which cargo
           cargo --version
       - name: Build

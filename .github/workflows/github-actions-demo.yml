@@ -34,7 +34,8 @@ jobs:
           export ANDROID_HOME="${ANDROID_SDK_ROOT}"
           export PATH="${ANDROID_SDK_ROOT}/emulator:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin:${PATH}"
           mkdir -p ${ANDROID_SDK_ROOT}
-          curl https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip ${ANDROID_SDK_ROOT}/cmdline-tools.zip
+          export CLI_TOOLS="https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip"
+          curl --silent --output /dev/null ${CLI_TOOLS} ${ANDROID_SDK_ROOT}/cmdline-tools.zip
           cd ${ANDROID_SDK_ROOT}
           pwd
           ls -lha

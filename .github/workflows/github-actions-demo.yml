@@ -18,13 +18,6 @@ jobs:
           whoami # runner
           sudo apt-get update > /dev/null
           sudo apt-get install -y curl build-essential clang-9
-      - name: InstallRust
-        run: |
-          curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --no-modify-path
-          export PATH=$PATH:$HOME/.cargo/bin
-          rustup install 1.58.1
-          rustup target add --toolchain 1.58.1 aarch64-linux-android
-          cargo --version
       - name: InstallAndroidTools
         run: |
           export ANDROID_HOME="${ANDROID_SDK_ROOT}"
@@ -45,8 +38,14 @@ jobs:
           sdkmanager "sources;android-22" "platforms;android-22" "sources;android-25" "platforms;android-25" > /dev/null
           echo "Installing NDK $NDK_VER..."
           sdkmanager "build-tools;30.0.3" "cmake;3.10.2.4988404" "ndk;$NDK_VER" > /dev/null
+      - name: InstallRust
+        run: |
+          curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none --no-modify-path
+          export PATH=$PATH:$HOME/.cargo/bin
+          rustup install 1.58.1
+          rustup target add --toolchain 1.58.1 aarch64-linux-android
+          cargo --version
       - name: Build
         run: |
           export ANDROID_HOME="${ANDROID_SDK_ROOT}"
-          export PATH="${ANDROID_SDK_ROOT}/emulator:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin:${PATH}"
-          cargo build --release --target=aarch64-linux-android
+          cargo build --release --target=aarch64-linux-android --toolchain 1.58.1

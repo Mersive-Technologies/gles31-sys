@@ -15,3 +15,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - RUN: |
+          cat /etc/*release
+          pwd
+          whoami
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          cargo --version
+          

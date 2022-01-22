@@ -1,2 +1,6 @@
 target/
 .idea/
+.DS_Store
+temp/
+extern/
+/src/bindings.rs

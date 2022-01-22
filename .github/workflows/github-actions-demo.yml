@@ -1,7 +1,7 @@
 name: Test-Build
 on: [push]
 jobs:
-  Build-Ios:
+  Build-iOS:
     runs-on: macos-11
     steps:
       - name: Check out repository code
@@ -10,8 +10,11 @@ jobs:
         run: |
           pwd
           whoami
-          echo "Hello, MacOS!"
-  Build-Andrid:
+          rustup target add aarch64-apple-ios x86_64-apple-ios
+          cargo install cargo-lipo
+      - name: Build
+        run: cargo lipo --release
+  Build-Android:
     runs-on: ubuntu-latest
     env:
       NDK_VER: 22.0.7026061

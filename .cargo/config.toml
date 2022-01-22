@@ -1,2 +1,7 @@
-[build]
-target = "aarch64-linux-android"
+[target.aarch64-linux-android]
+# This linker needed because in order to compile the crate for iOS it needs to be crate-type = ["staticlib"]
+# As for now it is impossible to set crate-type depending on target:
+# https://github.com/rust-lang/cargo/issues/4881 (feel free to kick this issue to make it happen faster)
+# Without this line staticlib will not link for Android
+# Solution from: https://github.com/rust-lang/rust/issues/28924
+linker = "arm-linux-androideabi-gcc"

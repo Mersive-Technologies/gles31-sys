@@ -14,6 +14,7 @@ fn symlink_gles(include_dir: &Path) {
     }
 
     fs::create_dir("temp").unwrap();
+    #[cfg(target_os = "macos")]
     std::os::unix::fs::symlink(include_dir, gles_dir).unwrap();
 }
 

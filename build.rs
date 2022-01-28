@@ -34,10 +34,16 @@ fn ios_setup() {
 fn android_setup() {
     let ndk_ver = env::var("NDK_VER").unwrap_or("21.3.6528147".to_string());
     let android_home = env::var("ANDROID_HOME").expect("ANDROID_HOME not set!");
+
+    #[cfg(target_os = "linux")]
+    let toolchain = "linux-x86_64";
+    #[cfg(target_os = "macos")]
+    let toolchain = "darwin-x86_64";
     let path = format!(
-        "ndk/{}/sysroot/usr/include",
-        ndk_ver
+        "ndk/{}/toolchains/llvm/prebuilt/{}/sysroot/usr/include/",
+        ndk_ver, toolchain
     );
+
     let ndk_include_dir = Path::new(android_home.as_str()).join(path);
     let gl31h = ndk_include_dir.join("GLES3/gl31.h");
     let gl31h = gl31h.to_str().unwrap();

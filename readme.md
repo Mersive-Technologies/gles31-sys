@@ -17,3 +17,9 @@ brew install --cask android-sdk
 export ANDROID_HOME=$HOME/Library/Android/sdk/ 
 cargo build
 ```
+                      
+## Publishing
+
+```shell
+cargo publish --target=aarch64-linux-android --no-verify
+```

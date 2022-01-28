@@ -35,7 +35,7 @@ fn android_setup() {
     let ndk_ver = env::var("NDK_VER").unwrap_or("21.3.6528147".to_string());
     let android_home = env::var("ANDROID_HOME").expect("ANDROID_HOME not set!");
     let path = format!(
-        "ndk/{}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/",
+        "ndk/{}/sysroot/usr/include",
         ndk_ver
     );
     let ndk_include_dir = Path::new(android_home.as_str()).join(path);
